@@ -3,1769 +3,669 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Marketing Automation Platform - Deploy autonomous agents to manage your social media presence 24/7">
-    <meta property="og:title" content="AgentX - AI Marketing Agent Platform">
-    <meta property="og:description" content="Autonomous AI agents for social media management">
-    <meta property="og:type" content="website">
-    <title>AgentX - AI Marketing Automation Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Nikal Do - Buy & Sell Locally</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        *,*::before,*::after{box-sizing:border-box}
-        html,body{margin:0;padding:0}
-        body{font-family:'Inter',sans-serif;background:#020617;color:#e2e8f0;overflow-x:hidden;line-height:1.6}
-        .font-display{font-family:'Space Grotesk',sans-serif}
-        .glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(12px);border:1px solid rgba(99,102,241,0.2)}
-        .glass-strong{background:rgba(15,23,42,0.8);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.3)}
-        .gradient-text{background:linear-gradient(135deg,#6366f1 0%,#ec4899 50%,#06b6d4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .grid-pattern{background-image:radial-gradient(rgba(99,102,241,0.1) 1px,transparent 1px);background-size:30px 30px}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-        @keyframes orbit{from{transform:rotate(0deg) translateX(100px) rotate(0deg)}to{transform:rotate(360deg) translateX(100px) rotate(-360deg)}}
-        @keyframes pulse-ring{0%{transform:scale(0.8);box-shadow:0 0 0 0 rgba(34,197,94,0.7)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{transform:scale(0.8);box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .animate-float{animation:float 6s ease-in-out infinite}
-        .animate-orbit{animation:orbit 20s linear infinite}
-        .status-dot{animation:pulse-ring 2s cubic-bezier(0.215,0.61,0.355,1) infinite}
-        .animate-marquee{animation:marquee 30s linear infinite}
-        .typing-cursor::after{content:'|';animation:blink 1s infinite}
-        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-        #canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-        .platform-card{transition:all 0.3s ease}
-        .platform-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -10px rgba(99,102,241,0.3)}
-        .scrollbar-hide::-webkit-scrollbar{display:none}
-        .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
-        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+        .hero-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .listing-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .listing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chat-bubble {
+            position: relative;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+        .chat-bubble:after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 12px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-right-color: #f3f4f6;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body>
-    <div id="canvas-container" aria-hidden="true"></div>
-    
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
+<body class="bg-gray-50 font-sans antialiased">
 
-    <nav class="fixed w-full z-50 glass-strong border-b border-white/10" role="navigation" aria-label="Main navigation">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-lg flex items-center justify-center" aria-hidden="true">
-                        <i class="fas fa-robot text-white text-sm"></i>
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="showPage('home')">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-gray-900 tracking-tight">Nikal Do</span>
                     </div>
-                    <span class="font-display font-bold text-xl tracking-tight">Agent<span class="text-indigo-400">X</span></span>
                 </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Features</a>
-                    <a href="#platforms" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Platforms</a>
-                    <a href="#dashboard" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Dashboard</a>
-                    <a href="#pricing" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Pricing</a>
+
+                <!-- Search Bar - Desktop -->
+                <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" placeholder="Search for anything... cars, phones, furniture" 
+                               class="w-full pl-12 pr-4 py-2.5 bg-gray-100 border-transparent focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 rounded-full transition-all duration-200 text-sm">
+                        <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                        <button onclick="handleSearch()" class="absolute right-2 top-1.5 bg-brand-600 text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-brand-700 transition-colors">
+                            Search
+                        </button>
+                    </div>
                 </div>
-                
+
+                <!-- Right Menu -->
                 <div class="flex items-center space-x-4">
-                    <button class="hidden md:block text-sm font-medium text-gray-300 hover:text-white" onclick="alert('Sign in coming soon')">Sign In</button>
-                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25" onclick="alert('Welcome! Deployment starts here.')">
-                        Get Started
+                    <button onclick="showPage('chat')" class="hidden md:flex items-center space-x-1 text-gray-600 hover:text-brand-600 transition-colors relative">
+                        <i class="fas fa-comment-dots text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
                     </button>
+                    
+                    <button onclick="toggleLanguage()" class="hidden md:flex items-center space-x-1 text-gray-600 hover:text-brand-600 font-medium">
+                        <i class="fas fa-globe"></i>
+                        <span class="text-sm">EN</span>
+                    </button>
+
+                    <button onclick="showPage('sell')" class="bg-brand-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-brand-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Sell</span>
+                    </button>
+
+                    <div class="relative group">
+                        <button onclick="toggleProfile()" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                            <div class="w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs hidden md:block"></i>
+                        </button>
+                        
+                        <!-- Profile Dropdown -->
+                        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
+                            <div class="px-4 py-3 border-b border-gray-100">
+                                <p class="text-sm font-semibold text-gray-900">Welcome to Nikal Do</p>
+                                <p class="text-xs text-gray-500 mt-1">Sign in to manage your listings</p>
+                            </div>
+                            <button onclick="showAuthModal('login')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-3">
+                                <i class="fas fa-sign-in-alt text-brand-600"></i>
+                                <span>Login</span>
+                            </button>
+                            <button onclick="showAuthModal('register')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-3">
+                                <i class="fas fa-user-plus text-brand-600"></i>
+                                <span>Register</span>
+                            </button>
+                            <div class="border-t border-gray-100 mt-2 pt-2">
+                                <button onclick="showPage('myads')" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-3">
+                                    <i class="fas fa-ad text-gray-400"></i>
+                                    <span>My Ads</span>
+                                </button>
+                                <button onclick="showPage('saved')" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-3">
+                                    <i class="fas fa-heart text-gray-400"></i>
+                                    <span>Saved Items</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search -->
+        <div class="md:hidden px-4 pb-3">
+            <div class="relative">
+                <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-full text-sm">
+                <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
             </div>
         </div>
     </nav>
 
-    <main id="main-content">
-        <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden" aria-label="Hero">
-            <div class="absolute inset-0 grid-pattern opacity-30" aria-hidden="true"></div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass border border-indigo-500/30">
-                            <span class="w-2 h-2 bg-green-400 rounded-full status-dot" aria-hidden="true"></span>
-                            <span class="text-xs font-medium text-indigo-400">AI Agent v2.0 Now Live</span>
-                        </div>
-                        
-                        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight">
-                            Your <span class="gradient-text">AI Marketing</span> Agent That Never Sleeps
-                        </h1>
-                        
-                        <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
-                            Deploy autonomous AI agents to create, schedule, and optimize content across all social platforms. Connect once, automate forever.
-                        </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="group bg-gradient-to-r from-indigo-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-white flex items-center justify-center space-x-2 hover:shadow-2xl hover:shadow-indigo-500/25 transition-all hover:scale-105" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">
-                                <span>Deploy Your Agent</span>
-                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
-                            </button>
-                            <button class="px-8 py-4 rounded-full font-semibold text-white border border-white/20 hover:bg-white/5 transition-all flex items-center justify-center space-x-2" onclick="alert('Demo video modal would open here')">
-                                <i class="fas fa-play text-xs" aria-hidden="true"></i>
-                                <span>Watch Demo</span>
-                            </button>
-                        </div>
-                        
-                        <div class="flex items-center space-x-6 text-sm text-gray-500">
-                            <div class="flex -space-x-2" aria-hidden="true">
-                                <div class="w-8 h-8 rounded-full bg-gray-700 border-2 border-slate-950 flex items-center justify-center text-xs">JD</div>
-                                <div class="w-8 h-8 rounded-full bg-gray-600 border-2 border-slate-950 flex items-center justify-center text-xs">MK</div>
-                                <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-slate-950 flex items-center justify-center text-xs">+2k</div>
+    <!-- Main Content Container -->
+    <main id="mainContent">
+        
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page-section">
+            <!-- Hero Section -->
+            <div class="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 text-white overflow-hidden">
+                <div class="absolute inset-0 hero-pattern opacity-20"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 border border-white/20">
+                                <span class="flex h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
+                                <span class="text-sm font-medium">20,000+ items sold this week</span>
                             </div>
-                            <span>Trusted by 2,000+ marketers</span>
+                            <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                                Sell what you don't need.<br>
+                                <span class="text-brand-200">Find what you do.</span>
+                            </h1>
+                            <p class="text-lg md:text-xl text-brand-100 max-w-lg">
+                                India's fastest growing local marketplace. Buy and sell electronics, cars, fashion, home goods and more in your neighborhood.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <button onclick="showPage('listings')" class="bg-white text-brand-700 px-8 py-3.5 rounded-full font-bold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    Browse Items
+                                </button>
+                                <button onclick="showPage('sell')" class="bg-brand-500 text-white px-8 py-3.5 rounded-full font-bold hover:bg-brand-400 transition-all shadow-lg border-2 border-brand-400">
+                                    Post Free Ad
+                                </button>
+                            </div>
+                            <div class="flex items-center space-x-6 text-sm text-brand-100 pt-4">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Verified Users</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Instant Chat</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Local Pickup</span>
+                                </div>
+                            </div>
                         </div>
+                        
+                        <!-- Hero Image Grid -->
+                        <div class="hidden md:grid grid-cols-2 gap-4 animate-float">
+                            <div class="space-y-4 mt-8">
+                                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=300&h=300&fit=crop" class="rounded-xl w-full h-48 object-cover mb-3" alt="iPhone">
+                                    <p class="font-semibold">iPhone 14 Pro</p>
+                                    <p class="text-brand-200 text-sm">₹65,000 • Mumbai</p>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300&h=300&fit=crop" class="rounded-xl w-full h-40 object-cover mb-3" alt="Car">
+                                    <p class="font-semibold">BMW 3 Series</p>
+                                    <p class="text-brand-200 text-sm">₹25,00,000 • Delhi</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&h=300&fit=crop" class="rounded-xl w-full h-40 object-cover mb-3" alt="Furniture">
+                                    <p class="font-semibold">Designer Sofa</p>
+                                    <p class="text-brand-200 text-sm">₹15,000 • Bangalore</p>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop" class="rounded-xl w-full h-48 object-cover mb-3" alt="Shoes">
+                                    <p class="font-semibold">Nike Air Max</p>
+                                    <p class="text-brand-200 text-sm">₹4,500 • Pune</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+                <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">Browse Categories</h2>
+                        <button onclick="showAllCategories()" class="text-brand-600 font-semibold hover:text-brand-700 text-sm">View All</button>
                     </div>
                     
-                    <div class="relative" aria-hidden="true">
-                        <div class="relative w-full aspect-square max-w-md mx-auto">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-64 h-64 border border-indigo-500/20 rounded-full animate-spin" style="animation-duration:30s"></div>
-                                <div class="absolute w-48 h-48 border border-pink-500/20 rounded-full animate-spin" style="animation-duration:20s;animation-direction:reverse"></div>
-                                <div class="absolute w-32 h-32 border border-cyan-500/20 rounded-full animate-spin" style="animation-duration:15s"></div>
+                    <div class="grid grid-cols-4 md:grid-cols-8 gap-4">
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('cars')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-car"></i>
                             </div>
-                            
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-32 h-32 bg-gradient-to-br from-indigo-500/20 to-pink-500/20 rounded-2xl backdrop-blur-xl border border-white/10 flex items-center justify-center animate-float shadow-2xl shadow-indigo-500/20">
-                                    <i class="fas fa-brain text-4xl gradient-text"></i>
-                                </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Cars</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('mobiles')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-mobile-alt"></i>
                             </div>
-                            
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 animate-orbit" style="animation-delay:0s">
-                                <div class="w-12 h-12 bg-[#1DA1F2]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#1DA1F2]/30">
-                                    <i class="fab fa-twitter text-[#1DA1F2]"></i>
-                                </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Mobiles</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('electronics')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-green-50 rounded-2xl flex items-center justify-center text-green-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-laptop"></i>
                             </div>
-                            <div class="absolute top-1/2 right-0 translate-x-1/2 animate-orbit" style="animation-delay:-5s">
-                                <div class="w-12 h-12 bg-[#E1306C]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#E1306C]/30">
-                                    <i class="fab fa-instagram text-[#E1306C]"></i>
-                                </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Electronics</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('furniture')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-couch"></i>
                             </div>
-                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 animate-orbit" style="animation-delay:-10s">
-                                <div class="w-12 h-12 bg-[#0A66C2]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#0A66C2]/30">
-                                    <i class="fab fa-linkedin text-[#0A66C2]"></i>
-                                </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Furniture</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('fashion')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-tshirt"></i>
                             </div>
-                            <div class="absolute top-1/2 left-0 -translate-x-1/2 animate-orbit" style="animation-delay:-15s">
-                                <div class="w-12 h-12 bg-[#FF0000]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#FF0000]/30">
-                                    <i class="fab fa-youtube text-[#FF0000]"></i>
-                                </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Fashion</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('sports')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-red-50 rounded-2xl flex items-center justify-center text-red-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-bicycle"></i>
                             </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Sports</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('books')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Books</p>
+                        </div>
+                        <div class="category-card cursor-pointer group" onclick="filterByCategory('pets')">
+                            <div class="category-icon w-16 h-16 mx-auto bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 text-2xl mb-2 transition-transform duration-300">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <p class="text-center text-sm font-medium text-gray-700 group-hover:text-brand-600">Pets</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <div class="border-y border-white/5 bg-black/20 backdrop-blur-sm overflow-hidden" aria-label="Live activity ticker">
-            <div class="flex animate-marquee whitespace-nowrap py-4">
-                <div class="flex items-center space-x-8 mx-4 text-sm">
-                    <span class="flex items-center space-x-2 text-green-400"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Agent posted on Twitter for @techcorp</span></span>
-                    <span class="flex items-center space-x-2 text-blue-400"><i class="fas fa-sync fa-spin" aria-hidden="true"></i><span>Analyzing engagement metrics...</span></span>
-                    <span class="flex items-center space-x-2 text-purple-400"><i class="fas fa-robot" aria-hidden="true"></i><span>AI generating Instagram carousel for @fashionbrand</span></span>
-                    <span class="flex items-center space-x-2 text-pink-400"><i class="fas fa-heart" aria-hidden="true"></i><span>Auto-replied to 47 comments on LinkedIn</span></span>
-                    <span class="flex items-center space-x-2 text-yellow-400"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Campaign ROI increased by 34%</span></span>
-                </div>
-                <div class="flex items-center space-x-8 mx-4 text-sm" aria-hidden="true">
-                    <span class="flex items-center space-x-2 text-green-400"><i class="fas fa-check-circle"></i><span>Agent posted on Twitter for @techcorp</span></span>
-                    <span class="flex items-center space-x-2 text-blue-400"><i class="fas fa-sync fa-spin"></i><span>Analyzing engagement metrics...</span></span>
-                    <span class="flex items-center space-x-2 text-purple-400"><i class="fas fa-robot"></i><span>AI generating Instagram carousel for @fashionbrand</span></span>
-                    <span class="flex items-center space-x-2 text-pink-400"><i class="fas fa-heart"></i><span>Auto-replied to 47 comments on LinkedIn</span></span>
-                </div>
-            </div>
-        </div>
-
-        <section id="platforms" class="py-24 relative" aria-labelledby="platforms-heading">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 id="platforms-heading" class="font-display text-4xl font-bold mb-4">Connect <span class="gradient-text">Everything</span></h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">One AI agent to manage them all. Native integrations with every major platform.</p>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" role="list">
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#1DA1F2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-twitter text-2xl text-[#1DA1F2]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Twitter connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Twitter/X</h3>
-                        <p class="text-xs text-gray-500">Auto-post threads & replies</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#E1306C]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-instagram text-2xl text-[#E1306C]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Instagram connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Instagram</h3>
-                        <p class="text-xs text-gray-500">Stories, Reels & Posts</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#0A66C2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-linkedin text-2xl text-[#0A66C2]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle LinkedIn connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">LinkedIn</h3>
-                        <p class="text-xs text-gray-500">Professional network posts</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#FF0000]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-youtube text-2xl text-[#FF0000]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle YouTube connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">YouTube</h3>
-                        <p class="text-xs text-gray-500">Video & Shorts automation</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-discord text-2xl text-[#5865F2]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Discord connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Discord</h3>
-                        <p class="text-xs text-gray-500">Community management</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-whatsapp text-2xl text-[#25D366]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle WhatsApp connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">WhatsApp</h3>
-                        <p class="text-xs text-gray-500">Business API integration</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-tiktok text-2xl text-white"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle TikTok connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">TikTok</h3>
-                        <p class="text-xs text-gray-500">Viral content automation</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#FF4500]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-reddit text-2xl text-[#FF4500]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Reddit connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Reddit</h3>
-                        <p class="text-xs text-gray-500">Subreddit monitoring</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="dashboard" class="py-24 relative overflow-hidden" aria-labelledby="dashboard-heading">
-            <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent" aria-hidden="true"></div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-12">
-                    <h2 id="dashboard-heading" class="font-display text-4xl font-bold mb-4">Command <span class="gradient-text">Center</span></h2>
-                    <p class="text-gray-400">Real-time control over your AI marketing workforce</p>
-                </div>
-
-                <div class="glass-strong rounded-3xl border border-white/10 overflow-hidden shadow-2xl shadow-indigo-500/10">
-                    <div class="border-b border-white/10 px-6 py-4 flex items-center justify-between bg-white/5">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex space-x-2" aria-hidden="true">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <span class="text-sm font-medium text-gray-400">AgentX Dashboard</span>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <button class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full border border-indigo-500/30">
-                                <i class="fas fa-circle text-[8px] mr-1 animate-pulse" aria-hidden="true"></i>
-                                Live
-                            </button>
-                            <i class="fas fa-bell text-gray-400 hover:text-white cursor-pointer" aria-hidden="true"></i>
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500" aria-hidden="true"></div>
-                        </div>
+            <!-- Fresh Recommendations -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Fresh Recommendations</h2>
+                        <p class="text-gray-500 mt-1">Based on your location • Mumbai</p>
                     </div>
-
-                    <div class="grid lg:grid-cols-4 min-h-[600px]">
-                        <nav class="hidden lg:block border-r border-white/10 p-6 space-y-6 bg-black/20" aria-label="Dashboard navigation">
-                            <div class="space-y-2">
-                                <button class="w-full text-left px-4 py-3 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center space-x-3" aria-current="page">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    <span>Overview</span>
-                                </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-robot" aria-hidden="true"></i>
-                                    <span>AI Agents</span>
-                                </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-calendar" aria-hidden="true"></i>
-                                    <span>Schedule</span>
-                                </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
-                                    <span>Analytics</span>
-                                </button>
-                            </div>
-
-                            <div class="pt-6 border-t border-white/10">
-                                <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Active Agents</h4>
-                                <div class="space-y-3">
-                                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-white/5">
-                                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true"></div>
-                                        <div class="flex-1">
-                                            <div class="text-sm font-medium">Content Creator</div>
-                                            <div class="text-xs text-gray-500">Posting to Instagram...</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-white/5">
-                                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true"></div>
-                                        <div class="flex-1">
-                                            <div class="text-sm font-medium">Engagement Bot</div>
-                                            <div class="text-xs text-gray-500">Replying to comments</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-
-                        <div class="lg:col-span-3 p-6 space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Total Reach</span>
-                                        <span class="text-green-400 text-xs">+24.5%</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">2.4M</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-indigo-500 w-3/4 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Engagement</span>
-                                        <span class="text-green-400 text-xs">+12.3%</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">89.2K</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-pink-500 w-1/2 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Posts Scheduled</span>
-                                        <span class="text-blue-400 text-xs">This week</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">47</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-cyan-500 w-2/3 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="glass rounded-2xl p-6 border border-white/10">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-semibold flex items-center space-x-2">
-                                        <i class="fas fa-magic text-indigo-400" aria-hidden="true"></i>
-                                        <span>AI Content Composer</span>
-                                    </h3>
-                                    <div class="flex space-x-2">
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('twitter')">Twitter</button>
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('linkedin')">LinkedIn</button>
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('instagram')">Instagram</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="space-y-4">
-                                    <div class="relative">
-                                        <textarea id="ai-input" class="w-full bg-black/30 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-colors resize-none h-24" placeholder="Describe what you want to post about..."></textarea>
-                                        <button onclick="generateContent()" class="absolute bottom-3 right-3 w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-colors" aria-label="Generate content">
-                                            <i class="fas fa-wand-magic-sparkles text-xs" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    
-                                    <div id="generated-content" class="hidden bg-black/20 rounded-xl p-4 border border-indigo-500/20">
-                                        <div class="flex items-start space-x-3">
-                                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                                                <i class="fas fa-robot text-xs"></i>
-                                            </div>
-                                            <div class="flex-1">
-                                                <p class="text-sm text-gray-300 typing-cursor" id="typing-text"></p>
-                                                <div class="mt-3 flex items-center space-x-2">
-                                                    <button class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1.5 rounded-lg border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors" onclick="alert('Posted successfully!')">
-                                                        <i class="fas fa-paper-plane mr-1" aria-hidden="true"></i> Post Now
-                                                    </button>
-                                                    <button class="text-xs bg-white/5 text-gray-300 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
-                                                        <i class="fas fa-clock mr-1" aria-hidden="true"></i> Schedule
-                                                    </button>
-                                                    <button class="text-xs bg-white/5 text-gray-300 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
-                                                        <i class="fas fa-edit mr-1" aria-hidden="true"></i> Edit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="glass rounded-2xl p-6 border border-white/10">
-                                <h3 class="font-semibold mb-4">Recent Agent Activity</h3>
-                                <div class="space-y-3" id="activity-feed" aria-live="polite" aria-atomic="false">
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5">
-                                        <div class="w-10 h-10 rounded-full bg-[#1DA1F2]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-twitter text-[#1DA1F2]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Posted thread on Twitter</span>
-                                                <span class="text-xs text-gray-500">2m ago</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">"5 AI trends that will change marketing in 2026..."</p>
-                                        </div>
-                                        <div class="flex items-center space-x-2 text-xs text-gray-500">
-                                            <span><i class="fas fa-heart text-red-400" aria-hidden="true"></i> 234</span>
-                                            <span><i class="fas fa-retweet text-green-400" aria-hidden="true"></i> 89</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5">
-                                        <div class="w-10 h-10 rounded-full bg-[#E1306C]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-instagram text-[#E1306C]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Generated carousel</span>
-                                                <span class="text-xs text-gray-500">15m ago</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">Product showcase for @brandname with AI captions</p>
-                                        </div>
-                                        <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Published</span>
-                                    </div>
-
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5 opacity-50">
-                                        <div class="w-10 h-10 rounded-full bg-[#0A66C2]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-linkedin text-[#0A66C2]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Scheduled post</span>
-                                                <span class="text-xs text-gray-500">Tomorrow 9:00 AM</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">Industry insights article share</p>
-                                        </div>
-                                        <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">Pending</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="flex space-x-2">
+                        <button onclick="scrollListings('left')" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-chevron-left text-gray-600"></i>
+                        </button>
+                        <button onclick="scrollListings('right')" class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-chevron-right text-gray-600"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="features" class="py-24 relative" aria-labelledby="features-heading">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 id="features-heading" class="sr-only">Features</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-indigo-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-brain text-2xl text-indigo-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Autonomous Content</h3>
-                        <p class="text-gray-400 leading-relaxed">AI agents that research trends, write copy, and generate visuals without human intervention. Set your brand voice once, let it run 24/7.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-pink-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-network-wired text-2xl text-pink-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Cross-Platform Sync</h3>
-                        <p class="text-gray-400 leading-relaxed">One content piece automatically adapted for each platform's format and audience. Native posting to 15+ social networks simultaneously.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-comments text-2xl text-cyan-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Smart Engagement</h3>
-                        <p class="text-gray-400 leading-relaxed">Auto-reply to comments, DMs, and mentions with context-aware responses. Maintain authentic conversations at scale.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-indigo-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-chart-pie text-2xl text-indigo-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Predictive Analytics</h3>
-                        <p class="text-gray-400 leading-relaxed">ML models predict optimal posting times, content performance, and trending topics before they peak.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-pink-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-shield-alt text-2xl text-pink-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Brand Safety</h3>
-                        <p class="text-gray-400 leading-relaxed">Advanced content filtering ensures every post aligns with your brand guidelines and compliance requirements.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-users text-2xl text-cyan-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Team Collaboration</h3>
-                        <p class="text-gray-400 leading-relaxed">Multi-agent workflows with approval chains, role-based access, and collaborative campaign management.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="py-24 relative" aria-labelledby="pricing-heading">
-            <div class="absolute inset-0 bg-gradient-to-t from-indigo-500/5 to-transparent" aria-hidden="true"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-16">
-                    <h2 id="pricing-heading" class="font-display text-4xl font-bold mb-4">Simple <span class="gradient-text">Pricing</span></h2>
-                    <p class="text-gray-400">Scale your AI marketing team without scaling your headcount</p>
+                <div id="listingsContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Listings injected by JS -->
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <article class="glass rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all">
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Starter</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display">$29</span>
-                            <span class="text-gray-500 ml-2">/month</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>1 AI Agent</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>3 Social Platforms</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>50 Posts/month</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Basic Analytics</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" onclick="alert('Starter plan selected')">Get Started</button>
-                    </article>
-
-                    <article class="glass rounded-3xl p-8 border border-indigo-500/50 relative transform md:-translate-y-4 shadow-2xl shadow-indigo-500/20">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-indigo-500 to-pink-500 px-4 py-1 rounded-full text-xs font-bold text-white">MOST POPULAR</div>
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Professional</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display gradient-text">$99</span>
-                            <span class="text-gray-500 ml-2">/month</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>5 AI Agents</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited Platforms</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited Posts</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Advanced Analytics</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>AI Image Generation</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Priority Support</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-indigo-500/25 transition-all hover:scale-105" onclick="alert('Pro trial started!')">Start Free Trial</button>
-                    </article>
-
-                    <article class="glass rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all">
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Enterprise</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display">Custom</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited AI Agents</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Custom Integrations</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Dedicated Infrastructure</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>SLA & 24/7 Support</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Custom AI Training</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" onclick="alert('Contact form would open')">Contact Sales</button>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 relative overflow-hidden" aria-label="Call to action">
-            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-pink-500/20 to-cyan-500/20 opacity-30" aria-hidden="true"></div>
-            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-                <h2 class="font-display text-5xl font-bold mb-6">Ready to Deploy Your <span class="gradient-text">AI Workforce?</span></h2>
-                <p class="text-xl text-gray-300 mb-8">Join thousands of marketers automating their social presence with intelligent agents.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="px-8 py-4 rounded-full bg-white text-slate-950 font-bold hover:scale-105 transition-transform" onclick="alert('Trial started! Check your email.')">Start Free 14-Day Trial</button>
-                    <button class="px-8 py-4 rounded-full border border-white/30 text-white font-medium hover:bg-white/10 transition-colors" onclick="alert('Demo scheduling modal')">Schedule Demo</button>
-                </div>
-                <p class="mt-6 text-sm text-gray-500">No credit card required • Cancel anytime</p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="border-t border-white/10 bg-black/40 backdrop-blur-lg" role="contentinfo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h4 class="font-bold mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-                        <li><a href="#platforms" class="hover:text-white transition-colors">Integrations</a></li>
-                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Cookies</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between">
-                <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <div class="w-6 h-6 bg-gradient-to-br from-indigo-500 to-pink-500 rounded flex items-center justify-center" aria-hidden="true">
-                        <i class="fas fa-robot text-white text-xs"></i>
-                    </div>
-                    <span class="font-display font-bold">AgentX</span>
-                </div>
-                <div class="flex space-x-6 text-gray-400">
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                </div>
-                <p class="text-sm text-gray-500 mt-4 md:mt-0">© 2026 AgentX. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Three.js Background
-        const scene=new THREE.Scene();
-        const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-        const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-        renderer.setSize(window.innerWidth,window.innerHeight);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        const particlesGeometry=new THREE.BufferGeometry();
-        const particlesCount=1500;
-        const posArray=new Float32Array(particlesCount*3);
-
-        for(let i=0;i<particlesCount*3;i++){
-            posArray[i]=(Math.random()-0.5)*50;
-        }
-
-        particlesGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3));
-        
-        const particlesMaterial=new THREE.PointsMaterial({
-            size:0.02,
-            color:0x6366f1,
-            transparent:true,
-            opacity:0.6,
-            blending:THREE.AdditiveBlending
-        });
-
-        const particlesMesh=new THREE.Points(particlesGeometry,particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z=5;
-
-        let mouseX=0,mouseY=0;
-        document.addEventListener('mousemove',(e)=>{
-            mouseX=e.clientX/window.innerWidth-0.5;
-            mouseY=e.clientY/window.innerHeight-0.5;
-        });
-
-        function animate(){
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y+=0.001;
-            particlesMesh.rotation.x+=0.001;
-            particlesMesh.rotation.x+=mouseY*0.05;
-            particlesMesh.rotation.y+=mouseX*0.05;
-            renderer.render(scene,camera);
-        }
-        animate();
-
-        window.addEventListener('resize',()=>{
-            camera.aspect=window.innerWidth/window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth,window.innerHeight);
-        });
-
-        // Platform Toggle
-        function togglePlatform(element){
-            const toggle=element.querySelector('.platform-toggle');
-            const badge=element.querySelector('.connected-badge');
-            const isActive=toggle.classList.contains('bg-green-500');
-            
-            if(!isActive){
-                toggle.classList.remove('bg-gray-700');
-                toggle.classList.add('bg-green-500');
-                toggle.querySelector('div').classList.add('translate-x-4');
-                toggle.setAttribute('aria-checked','true');
-                badge.classList.remove('opacity-0');
-                element.classList.add('border-green-500/50');
-            }else{
-                toggle.classList.add('bg-gray-700');
-                toggle.classList.remove('bg-green-500');
-                toggle.querySelector('div').classList.remove('translate-x-4');
-                toggle.setAttribute('aria-checked','false');
-                badge.classList.add('opacity-0');
-                element.classList.remove('border-green-500/50');
-            }
-        }
-
-        // AI Content Generation
-        const sampleContents={
-            twitter:"🚀 Just dropped: Our AI agent now supports predictive analytics! Know which content will go viral before you post. Thread below 👇 #AIMarketing #SocialMedia",
-            linkedin:"Excited to announce that our latest AI marketing automation features are now live. After 6 months of development, we've achieved 40% higher engagement rates through predictive content optimization.",
-            instagram:"✨ Behind the scenes: How our AI creates the perfect carousel posts\n\n1️⃣ Analyzes trending visuals\n2️⃣ Generates cohesive color palettes\n3️⃣ Writes engaging captions\n4️⃣ Optimizes for your audience\n\nSave this for later! 🔖"
-        };
-
-        let typingInterval;
-
-        function generateContent(platform){
-            const container=document.getElementById('generated-content');
-            const textElement=document.getElementById('typing-text');
-            const input=document.getElementById('ai-input');
-            
-            if(typingInterval)clearInterval(typingInterval);
-            container.classList.remove('hidden');
-            
-            let content;
-            if(platform&&sampleContents[platform]){
-                content=sampleContents[platform];
-            }else if(input.value.trim()){
-                content=`Generated post about: "${input.value}"\n\nHere's an engaging caption optimized for maximum reach based on current trending topics...`;
-            }else{
-                const keys=Object.keys(sampleContents);
-                content=sampleContents[keys[Math.floor(Math.random()*keys.length)]];
-            }
-            
-            textElement.textContent='';
-            let i=0;
-            typingInterval=setInterval(()=>{
-                if(i<content.length){
-                    textElement.textContent+=content.charAt(i);
-                    i++;
-                }else{
-                    clearInterval(typingInterval);
-                }
-            },30);
-        }
-
-        // Activity Feed Updates
-        const activities=[
-            {platform:'twitter',icon:'fab fa-twitter',color:'#1DA1F2',text:'Analyzed trending hashtags for optimal reach'},
-            {platform:'instagram',icon:'fab fa-instagram',color:'#E1306C',text:'Generated visual content for Stories'},
-            {platform:'linkedin',icon:'fab fa-linkedin',color:'#0A66C2',text:'Scheduled thought leadership article'}
-        ];
-
-        setInterval(()=>{
-            const feed=document.getElementById('activity-feed');
-            const randomActivity=activities[Math.floor(Math.random()*activities.length)];
-            
-            const newItem=document.createElement('div');
-            newItem.className='flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5 animate-pulse';
-            newItem.innerHTML=`
-                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:${randomActivity.color}20">
-                    <i class="${randomActivity.icon}" style="color:${randomActivity.color}"></i>
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                        <span class="font-medium text-sm">AI Agent Action</span>
-                        <span class="text-xs text-gray-500">Just now</span>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">${randomActivity.text}</p>
-                </div>
-            `;
-            
-            feed.insertBefore(newItem,feed.firstChild);
-            if(feed.children.length>5)feed.removeChild(feed.lastChild);
-            setTimeout(()=>newItem.classList.remove('animate-pulse'),1000);
-        },8000);
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-            anchor.addEventListener('click',function(e){
-                e.preventDefault();
-                const target=document.querySelector(this.getAttribute('href'));
-                if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
-            });
-        });
-
-        // Intersection Observer
-        const observer=new IntersectionObserver((entries)=>{
-            entries.forEach(entry=>{
-                if(entry.isIntersecting){
-                    entry.target.style.opacity='1';
-                    entry.target.style.transform='translateY(0)';
-                }
-            });
-        },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-
-        document.querySelectorAll('.glass, .platform-card').forEach((el,index)=>{
-            el.style.opacity='0';
-            el.style.transform='translateY(20px)';
-            el.style.transition=`all 0.6s ease ${index*0.1}s`;
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Marketing Automation Platform - Deploy autonomous agents to manage your social media presence 24/7">
-    <meta property="og:title" content="AgentX - AI Marketing Agent Platform">
-    <meta property="og:description" content="Autonomous AI agents for social media management">
-    <meta property="og:type" content="website">
-    <title>AgentX - AI Marketing Automation Platform</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        *,*::before,*::after{box-sizing:border-box}
-        html,body{margin:0;padding:0}
-        body{font-family:'Inter',sans-serif;background:#020617;color:#e2e8f0;overflow-x:hidden;line-height:1.6}
-        .font-display{font-family:'Space Grotesk',sans-serif}
-        .glass{background:rgba(15,23,42,0.6);backdrop-filter:blur(12px);border:1px solid rgba(99,102,241,0.2)}
-        .glass-strong{background:rgba(15,23,42,0.8);backdrop-filter:blur(20px);border:1px solid rgba(99,102,241,0.3)}
-        .gradient-text{background:linear-gradient(135deg,#6366f1 0%,#ec4899 50%,#06b6d4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .grid-pattern{background-image:radial-gradient(rgba(99,102,241,0.1) 1px,transparent 1px);background-size:30px 30px}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-        @keyframes orbit{from{transform:rotate(0deg) translateX(100px) rotate(0deg)}to{transform:rotate(360deg) translateX(100px) rotate(-360deg)}}
-        @keyframes pulse-ring{0%{transform:scale(0.8);box-shadow:0 0 0 0 rgba(34,197,94,0.7)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{transform:scale(0.8);box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .animate-float{animation:float 6s ease-in-out infinite}
-        .animate-orbit{animation:orbit 20s linear infinite}
-        .status-dot{animation:pulse-ring 2s cubic-bezier(0.215,0.61,0.355,1) infinite}
-        .animate-marquee{animation:marquee 30s linear infinite}
-        .typing-cursor::after{content:'|';animation:blink 1s infinite}
-        @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-        #canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-        .platform-card{transition:all 0.3s ease}
-        .platform-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px -10px rgba(99,102,241,0.3)}
-        .scrollbar-hide::-webkit-scrollbar{display:none}
-        .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
-        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
-    </style>
-</head>
-<body>
-    <div id="canvas-container" aria-hidden="true"></div>
-    
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to main content</a>
-
-    <nav class="fixed w-full z-50 glass-strong border-b border-white/10" role="navigation" aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-lg flex items-center justify-center" aria-hidden="true">
-                        <i class="fas fa-robot text-white text-sm"></i>
-                    </div>
-                    <span class="font-display font-bold text-xl tracking-tight">Agent<span class="text-indigo-400">X</span></span>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Features</a>
-                    <a href="#platforms" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Platforms</a>
-                    <a href="#dashboard" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Dashboard</a>
-                    <a href="#pricing" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Pricing</a>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <button class="hidden md:block text-sm font-medium text-gray-300 hover:text-white" onclick="alert('Sign in coming soon')">Sign In</button>
-                    <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25" onclick="alert('Welcome! Deployment starts here.')">
-                        Get Started
+                <div class="mt-8 text-center">
+                    <button onclick="loadMoreListings()" class="bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-full font-semibold hover:border-brand-500 hover:text-brand-600 transition-all">
+                        Load More
                     </button>
                 </div>
             </div>
-        </div>
-    </nav>
 
-    <main id="main-content">
-        <section class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden" aria-label="Hero">
-            <div class="absolute inset-0 grid-pattern opacity-30" aria-hidden="true"></div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass border border-indigo-500/30">
-                            <span class="w-2 h-2 bg-green-400 rounded-full status-dot" aria-hidden="true"></span>
-                            <span class="text-xs font-medium text-indigo-400">AI Agent v2.0 Now Live</span>
-                        </div>
-                        
-                        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight">
-                            Your <span class="gradient-text">AI Marketing</span> Agent That Never Sleeps
-                        </h1>
-                        
-                        <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
-                            Deploy autonomous AI agents to create, schedule, and optimize content across all social platforms. Connect once, automate forever.
-                        </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button class="group bg-gradient-to-r from-indigo-500 to-pink-500 px-8 py-4 rounded-full font-semibold text-white flex items-center justify-center space-x-2 hover:shadow-2xl hover:shadow-indigo-500/25 transition-all hover:scale-105" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">
-                                <span>Deploy Your Agent</span>
-                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
-                            </button>
-                            <button class="px-8 py-4 rounded-full font-semibold text-white border border-white/20 hover:bg-white/5 transition-all flex items-center justify-center space-x-2" onclick="alert('Demo video modal would open here')">
-                                <i class="fas fa-play text-xs" aria-hidden="true"></i>
-                                <span>Watch Demo</span>
-                            </button>
-                        </div>
-                        
-                        <div class="flex items-center space-x-6 text-sm text-gray-500">
-                            <div class="flex -space-x-2" aria-hidden="true">
-                                <div class="w-8 h-8 rounded-full bg-gray-700 border-2 border-slate-950 flex items-center justify-center text-xs">JD</div>
-                                <div class="w-8 h-8 rounded-full bg-gray-600 border-2 border-slate-950 flex items-center justify-center text-xs">MK</div>
-                                <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-slate-950 flex items-center justify-center text-xs">+2k</div>
+            <!-- How It Works -->
+            <div class="bg-gray-100 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-900">How Nikal Do Works</h2>
+                        <p class="text-gray-600 mt-2">Sell your items in 3 simple steps</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-20 h-20 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 text-3xl mx-auto mb-4">
+                                <i class="fas fa-camera"></i>
                             </div>
-                            <span>Trusted by 2,000+ marketers</span>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">1. Take Photos</h3>
+                            <p class="text-gray-600">Snap clear photos of your item from multiple angles. Good photos sell faster!</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-20 h-20 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 text-3xl mx-auto mb-4">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">2. Post for Free</h3>
+                            <p class="text-gray-600">Create your listing in under 2 minutes. Set your price and add details.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-20 h-20 bg-brand-100 rounded-full flex items-center justify-center text-brand-600 text-3xl mx-auto mb-4">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">3. Deal Locally</h3>
+                            <p class="text-gray-600">Chat with buyers, negotiate and meet locally to complete the sale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LISTINGS PAGE -->
+        <div id="listingsPage" class="page-section hidden">
+            <div class="bg-white border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <h1 class="text-2xl font-bold text-gray-900">All Listings</h1>
+                        
+                        <!-- Filters -->
+                        <div class="flex flex-wrap gap-2">
+                            <select id="categoryFilter" onchange="applyFilters()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                <option value="">All Categories</option>
+                                <option value="cars">Cars</option>
+                                <option value="mobiles">Mobiles</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="fashion">Fashion</option>
+                            </select>
+                            
+                            <select id="priceFilter" onchange="applyFilters()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                <option value="">Price Range</option>
+                                <option value="0-1000">Under ₹1,000</option>
+                                <option value="1000-5000">₹1,000 - ₹5,000</option>
+                                <option value="5000-20000">₹5,000 - ₹20,000</option>
+                                <option value="20000-100000">₹20,000 - ₹1,00,000</option>
+                                <option value="100000+">Above ₹1,00,000</option>
+                            </select>
+                            
+                            <select id="locationFilter" onchange="applyFilters()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                <option value="">All Locations</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="pune">Pune</option>
+                                <option value="hyderabad">Hyderabad</option>
+                            </select>
+                            
+                            <select id="sortFilter" onchange="applyFilters()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                <option value="newest">Newest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div id="filteredListings" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Filtered listings injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCT DETAIL PAGE -->
+        <div id="productPage" class="page-section hidden bg-gray-50 min-h-screen pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <button onclick="showPage('home')" class="mb-4 flex items-center text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to listings
+                </button>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Image Gallery -->
+                    <div class="md:col-span-2 space-y-4">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+                            <img id="productMainImage" src="" alt="Product" class="w-full h-96 object-cover">
+                        </div>
+                        <div class="flex space-x-2 overflow-x-auto scroll-hidden" id="productThumbnails">
+                            <!-- Thumbnails injected here -->
                         </div>
                     </div>
                     
-                    <div class="relative" aria-hidden="true">
-                        <div class="relative w-full aspect-square max-w-md mx-auto">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-64 h-64 border border-indigo-500/20 rounded-full animate-spin" style="animation-duration:30s"></div>
-                                <div class="absolute w-48 h-48 border border-pink-500/20 rounded-full animate-spin" style="animation-duration:20s;animation-direction:reverse"></div>
-                                <div class="absolute w-32 h-32 border border-cyan-500/20 rounded-full animate-spin" style="animation-duration:15s"></div>
+                    <!-- Product Info -->
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <h1 id="productTitle" class="text-2xl font-bold text-gray-900"></h1>
+                                <button onclick="toggleSaveItem()" class="text-gray-400 hover:text-red-500 transition-colors">
+                                    <i class="far fa-heart text-2xl" id="saveIcon"></i>
+                                </button>
+                            </div>
+                            <p id="productPrice" class="text-3xl font-bold text-brand-600 mb-4"></p>
+                            
+                            <div class="flex items-center text-sm text-gray-500 mb-6 space-x-4">
+                                <span class="flex items-center"><i class="fas fa-map-marker-alt mr-1"></i> <span id="productLocation"></span></span>
+                                <span class="flex items-center"><i class="far fa-clock mr-1"></i> <span id="productTime"></span></span>
                             </div>
                             
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-32 h-32 bg-gradient-to-br from-indigo-500/20 to-pink-500/20 rounded-2xl backdrop-blur-xl border border-white/10 flex items-center justify-center animate-float shadow-2xl shadow-indigo-500/20">
-                                    <i class="fas fa-brain text-4xl gradient-text"></i>
-                                </div>
+                            <div class="space-y-3">
+                                <button onclick="showChatModal()" class="w-full bg-brand-600 text-white py-3 rounded-xl font-semibold hover:bg-brand-700 transition-colors flex items-center justify-center space-x-2">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <span>Chat with Seller</span>
+                                </button>
+                                <button onclick="makeOffer()" class="w-full bg-white border-2 border-brand-600 text-brand-600 py-3 rounded-xl font-semibold hover:bg-brand-50 transition-colors">
+                                    Make Offer
+                                </button>
                             </div>
                             
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 animate-orbit" style="animation-delay:0s">
-                                <div class="w-12 h-12 bg-[#1DA1F2]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#1DA1F2]/30">
-                                    <i class="fab fa-twitter text-[#1DA1F2]"></i>
-                                </div>
-                            </div>
-                            <div class="absolute top-1/2 right-0 translate-x-1/2 animate-orbit" style="animation-delay:-5s">
-                                <div class="w-12 h-12 bg-[#E1306C]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#E1306C]/30">
-                                    <i class="fab fa-instagram text-[#E1306C]"></i>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 animate-orbit" style="animation-delay:-10s">
-                                <div class="w-12 h-12 bg-[#0A66C2]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#0A66C2]/30">
-                                    <i class="fab fa-linkedin text-[#0A66C2]"></i>
-                                </div>
-                            </div>
-                            <div class="absolute top-1/2 left-0 -translate-x-1/2 animate-orbit" style="animation-delay:-15s">
-                                <div class="w-12 h-12 bg-[#FF0000]/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-[#FF0000]/30">
-                                    <i class="fab fa-youtube text-[#FF0000]"></i>
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">
+                                        <i class="fas fa-user text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Verified Seller</p>
+                                        <p class="text-sm text-gray-500">Member since 2023 • 12 ads</p>
+                                    </div>
+                                    <button class="ml-auto text-brand-600 text-sm font-semibold">View Profile</button>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="bg-white rounded-2xl p-6 shadow-sm">
+                            <h3 class="font-bold text-gray-900 mb-3">Details</h3>
+                            <div class="space-y-2 text-sm" id="productDetails">
+                                <!-- Details injected here -->
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-6 shadow-sm">
+                            <h3 class="font-bold text-gray-900 mb-3">Description</h3>
+                            <p id="productDescription" class="text-gray-600 text-sm leading-relaxed"></p>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 flex items-start space-x-3">
+                            <i class="fas fa-shield-alt text-yellow-600 mt-1"></i>
+                            <div>
+                                <p class="text-sm font-semibold text-yellow-800">Safety Tips</p>
+                                <p class="text-xs text-yellow-700 mt-1">• Meet in public places<br>• Check item before paying<br>• Never pay in advance</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="border-y border-white/5 bg-black/20 backdrop-blur-sm overflow-hidden" aria-label="Live activity ticker">
-            <div class="flex animate-marquee whitespace-nowrap py-4">
-                <div class="flex items-center space-x-8 mx-4 text-sm">
-                    <span class="flex items-center space-x-2 text-green-400"><i class="fas fa-check-circle" aria-hidden="true"></i><span>Agent posted on Twitter for @techcorp</span></span>
-                    <span class="flex items-center space-x-2 text-blue-400"><i class="fas fa-sync fa-spin" aria-hidden="true"></i><span>Analyzing engagement metrics...</span></span>
-                    <span class="flex items-center space-x-2 text-purple-400"><i class="fas fa-robot" aria-hidden="true"></i><span>AI generating Instagram carousel for @fashionbrand</span></span>
-                    <span class="flex items-center space-x-2 text-pink-400"><i class="fas fa-heart" aria-hidden="true"></i><span>Auto-replied to 47 comments on LinkedIn</span></span>
-                    <span class="flex items-center space-x-2 text-yellow-400"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Campaign ROI increased by 34%</span></span>
-                </div>
-                <div class="flex items-center space-x-8 mx-4 text-sm" aria-hidden="true">
-                    <span class="flex items-center space-x-2 text-green-400"><i class="fas fa-check-circle"></i><span>Agent posted on Twitter for @techcorp</span></span>
-                    <span class="flex items-center space-x-2 text-blue-400"><i class="fas fa-sync fa-spin"></i><span>Analyzing engagement metrics...</span></span>
-                    <span class="flex items-center space-x-2 text-purple-400"><i class="fas fa-robot"></i><span>AI generating Instagram carousel for @fashionbrand</span></span>
-                    <span class="flex items-center space-x-2 text-pink-400"><i class="fas fa-heart"></i><span>Auto-replied to 47 comments on LinkedIn</span></span>
                 </div>
             </div>
         </div>
 
-        <section id="platforms" class="py-24 relative" aria-labelledby="platforms-heading">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 id="platforms-heading" class="font-display text-4xl font-bold mb-4">Connect <span class="gradient-text">Everything</span></h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">One AI agent to manage them all. Native integrations with every major platform.</p>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" role="list">
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#1DA1F2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-twitter text-2xl text-[#1DA1F2]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Twitter connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
+        <!-- SELL PAGE -->
+        <div id="sellPage" class="page-section hidden bg-gray-50 min-h-screen py-8">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-lg p-6 md:p-10">
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900">Post Your Ad</h1>
+                        <p class="text-gray-500 mt-2">Reach thousands of buyers in your area</p>
+                    </div>
+                    
+                    <form id="sellForm" onsubmit="handlePostAd(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Ad Title *</label>
+                            <input type="text" required placeholder="What are you selling?" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all">
                         </div>
-                        <h3 class="font-semibold mb-1">Twitter/X</h3>
-                        <p class="text-xs text-gray-500">Auto-post threads & replies</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#E1306C]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-instagram text-2xl text-[#E1306C]"></i>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Category *</label>
+                                <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                    <option value="">Select Category</option>
+                                    <option>Cars</option>
+                                    <option>Mobiles</option>
+                                    <option>Electronics</option>
+                                    <option>Furniture</option>
+                                    <option>Fashion</option>
+                                    <option>Sports</option>
+                                    <option>Books</option>
+                                    <option>Pets</option>
+                                </select>
                             </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Instagram connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Instagram</h3>
-                        <p class="text-xs text-gray-500">Stories, Reels & Posts</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#0A66C2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-linkedin text-2xl text-[#0A66C2]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle LinkedIn connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Price (₹) *</label>
+                                <input type="number" required placeholder="Enter price" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
                             </div>
                         </div>
-                        <h3 class="font-semibold mb-1">LinkedIn</h3>
-                        <p class="text-xs text-gray-500">Professional network posts</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Description *</label>
+                            <textarea required rows="4" placeholder="Describe your item in detail..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200"></textarea>
+                            <p class="text-xs text-gray-500 mt-1">Include condition, features, and reason for selling</p>
                         </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#FF0000]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-youtube text-2xl text-[#FF0000]"></i>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Photos</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-brand-500 transition-colors cursor-pointer" onclick="document.getElementById('photoInput').click()">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                                <p class="text-gray-600 font-medium">Click to upload photos</p>
+                                <p class="text-sm text-gray-400 mt-1">or drag and drop</p>
+                                <input type="file" id="photoInput" multiple accept="image/*" class="hidden" onchange="handlePhotoUpload(this)">
                             </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle YouTube connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
+                            <div id="photoPreview" class="flex gap-2 mt-4 flex-wrap"></div>
                         </div>
-                        <h3 class="font-semibold mb-1">YouTube</h3>
-                        <p class="text-xs text-gray-500">Video & Shorts automation</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#5865F2]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-discord text-2xl text-[#5865F2]"></i>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Location *</label>
+                                <input type="text" required placeholder="City, Area" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
                             </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Discord connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
+                                <input type="text" required placeholder="Full name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
                             </div>
                         </div>
-                        <h3 class="font-semibold mb-1">Discord</h3>
-                        <p class="text-xs text-gray-500">Community management</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" required placeholder="10-digit mobile number" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
                         </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-whatsapp text-2xl text-[#25D366]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle WhatsApp connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">WhatsApp</h3>
-                        <p class="text-xs text-gray-500">Business API integration</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-black border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-tiktok text-2xl text-white"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle TikTok connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">TikTok</h3>
-                        <p class="text-xs text-gray-500">Viral content automation</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-
-                    <article class="platform-card glass rounded-2xl p-6 cursor-pointer group" onclick="togglePlatform(this)" role="listitem" tabindex="0" onkeypress="if(event.key==='Enter')togglePlatform(this)">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-[#FF4500]/10 flex items-center justify-center group-hover:scale-110 transition-transform" aria-hidden="true">
-                                <i class="fab fa-reddit text-2xl text-[#FF4500]"></i>
-                            </div>
-                            <div class="platform-toggle w-10 h-6 rounded-full bg-gray-700 relative transition-colors" role="switch" aria-checked="false" aria-label="Toggle Reddit connection">
-                                <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-semibold mb-1">Reddit</h3>
-                        <p class="text-xs text-gray-500">Subreddit monitoring</p>
-                        <div class="mt-4 flex items-center space-x-2 text-xs text-green-400 opacity-0 transition-opacity connected-badge">
-                            <i class="fas fa-check" aria-hidden="true"></i>
-                            <span>Connected</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="dashboard" class="py-24 relative overflow-hidden" aria-labelledby="dashboard-heading">
-            <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent" aria-hidden="true"></div>
-            
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-12">
-                    <h2 id="dashboard-heading" class="font-display text-4xl font-bold mb-4">Command <span class="gradient-text">Center</span></h2>
-                    <p class="text-gray-400">Real-time control over your AI marketing workforce</p>
-                </div>
-
-                <div class="glass-strong rounded-3xl border border-white/10 overflow-hidden shadow-2xl shadow-indigo-500/10">
-                    <div class="border-b border-white/10 px-6 py-4 flex items-center justify-between bg-white/5">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex space-x-2" aria-hidden="true">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <span class="text-sm font-medium text-gray-400">AgentX Dashboard</span>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <button class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full border border-indigo-500/30">
-                                <i class="fas fa-circle text-[8px] mr-1 animate-pulse" aria-hidden="true"></i>
-                                Live
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-brand-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                Post Ad Now
                             </button>
-                            <i class="fas fa-bell text-gray-400 hover:text-white cursor-pointer" aria-hidden="true"></i>
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500" aria-hidden="true"></div>
+                            <p class="text-center text-sm text-gray-500 mt-4">By posting, you agree to our Terms of Use and Privacy Policy</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT PAGE -->
+        <div id="chatPage" class="page-section hidden bg-gray-50 min-h-screen">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 h-[calc(100vh-80px)]">
+                <div class="bg-white rounded-2xl shadow-lg h-full overflow-hidden flex">
+                    <!-- Chat List -->
+                    <div class="w-full md:w-1/3 border-r border-gray-200 flex flex-col">
+                        <div class="p-4 border-b border-gray-200">
+                            <h2 class="text-xl font-bold text-gray-900">Messages</h2>
+                        </div>
+                        <div class="flex-1 overflow-y-auto" id="chatList">
+                            <!-- Chat list items injected here -->
                         </div>
                     </div>
-
-                    <div class="grid lg:grid-cols-4 min-h-[600px]">
-                        <nav class="hidden lg:block border-r border-white/10 p-6 space-y-6 bg-black/20" aria-label="Dashboard navigation">
-                            <div class="space-y-2">
-                                <button class="w-full text-left px-4 py-3 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center space-x-3" aria-current="page">
-                                    <i class="fas fa-home" aria-hidden="true"></i>
-                                    <span>Overview</span>
+                    
+                    <!-- Chat Window -->
+                    <div class="hidden md:flex md:w-2/3 flex-col" id="chatWindow">
+                        <div class="p-4 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-600">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Rahul Sharma</p>
+                                    <p class="text-xs text-green-600">Online</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 text-gray-500 hover:text-gray-700"><i class="fas fa-phone"></i></button>
+                                <button class="p-2 text-gray-500 hover:text-gray-700"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" id="messageContainer">
+                            <!-- Messages injected here -->
+                        </div>
+                        
+                        <div class="p-4 border-t border-gray-200 bg-white">
+                            <form onsubmit="sendMessage(event)" class="flex space-x-2">
+                                <input type="text" id="messageInput" placeholder="Type a message..." class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:border-brand-500 focus:ring-2 focus:ring-brand-200">
+                                <button type="submit" class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center justify-center hover:bg-brand-700 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
                                 </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-robot" aria-hidden="true"></i>
-                                    <span>AI Agents</span>
-                                </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-calendar" aria-hidden="true"></i>
-                                    <span>Schedule</span>
-                                </button>
-                                <button class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 flex items-center space-x-3 transition-colors">
-                                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
-                                    <span>Analytics</span>
-                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="hidden md:flex md:w-2/3 items-center justify-center bg-gray-50" id="emptyChat">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-3xl mx-auto mb-4">
+                                <i class="fas fa-comment-dots"></i>
                             </div>
-
-                            <div class="pt-6 border-t border-white/10">
-                                <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Active Agents</h4>
-                                <div class="space-y-3">
-                                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-white/5">
-                                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true"></div>
-                                        <div class="flex-1">
-                                            <div class="text-sm font-medium">Content Creator</div>
-                                            <div class="text-xs text-gray-500">Posting to Instagram...</div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-white/5">
-                                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true"></div>
-                                        <div class="flex-1">
-                                            <div class="text-sm font-medium">Engagement Bot</div>
-                                            <div class="text-xs text-gray-500">Replying to comments</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-
-                        <div class="lg:col-span-3 p-6 space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Total Reach</span>
-                                        <span class="text-green-400 text-xs">+24.5%</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">2.4M</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-indigo-500 w-3/4 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Engagement</span>
-                                        <span class="text-green-400 text-xs">+12.3%</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">89.2K</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-pink-500 w-1/2 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div class="glass rounded-2xl p-6 border border-white/5">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-gray-400 text-sm">Posts Scheduled</span>
-                                        <span class="text-blue-400 text-xs">This week</span>
-                                    </div>
-                                    <div class="text-3xl font-bold font-display">47</div>
-                                    <div class="mt-2 h-1 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
-                                        <div class="h-full bg-cyan-500 w-2/3 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="glass rounded-2xl p-6 border border-white/10">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-semibold flex items-center space-x-2">
-                                        <i class="fas fa-magic text-indigo-400" aria-hidden="true"></i>
-                                        <span>AI Content Composer</span>
-                                    </h3>
-                                    <div class="flex space-x-2">
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('twitter')">Twitter</button>
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('linkedin')">LinkedIn</button>
-                                        <button class="px-3 py-1 rounded-lg bg-white/5 text-xs hover:bg-white/10 transition-colors" onclick="generateContent('instagram')">Instagram</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="space-y-4">
-                                    <div class="relative">
-                                        <textarea id="ai-input" class="w-full bg-black/30 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-colors resize-none h-24" placeholder="Describe what you want to post about..."></textarea>
-                                        <button onclick="generateContent()" class="absolute bottom-3 right-3 w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-colors" aria-label="Generate content">
-                                            <i class="fas fa-wand-magic-sparkles text-xs" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    
-                                    <div id="generated-content" class="hidden bg-black/20 rounded-xl p-4 border border-indigo-500/20">
-                                        <div class="flex items-start space-x-3">
-                                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                                                <i class="fas fa-robot text-xs"></i>
-                                            </div>
-                                            <div class="flex-1">
-                                                <p class="text-sm text-gray-300 typing-cursor" id="typing-text"></p>
-                                                <div class="mt-3 flex items-center space-x-2">
-                                                    <button class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1.5 rounded-lg border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors" onclick="alert('Posted successfully!')">
-                                                        <i class="fas fa-paper-plane mr-1" aria-hidden="true"></i> Post Now
-                                                    </button>
-                                                    <button class="text-xs bg-white/5 text-gray-300 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
-                                                        <i class="fas fa-clock mr-1" aria-hidden="true"></i> Schedule
-                                                    </button>
-                                                    <button class="text-xs bg-white/5 text-gray-300 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors">
-                                                        <i class="fas fa-edit mr-1" aria-hidden="true"></i> Edit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="glass rounded-2xl p-6 border border-white/10">
-                                <h3 class="font-semibold mb-4">Recent Agent Activity</h3>
-                                <div class="space-y-3" id="activity-feed" aria-live="polite" aria-atomic="false">
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5">
-                                        <div class="w-10 h-10 rounded-full bg-[#1DA1F2]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-twitter text-[#1DA1F2]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Posted thread on Twitter</span>
-                                                <span class="text-xs text-gray-500">2m ago</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">"5 AI trends that will change marketing in 2026..."</p>
-                                        </div>
-                                        <div class="flex items-center space-x-2 text-xs text-gray-500">
-                                            <span><i class="fas fa-heart text-red-400" aria-hidden="true"></i> 234</span>
-                                            <span><i class="fas fa-retweet text-green-400" aria-hidden="true"></i> 89</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5">
-                                        <div class="w-10 h-10 rounded-full bg-[#E1306C]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-instagram text-[#E1306C]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Generated carousel</span>
-                                                <span class="text-xs text-gray-500">15m ago</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">Product showcase for @brandname with AI captions</p>
-                                        </div>
-                                        <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Published</span>
-                                    </div>
-
-                                    <div class="flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5 opacity-50">
-                                        <div class="w-10 h-10 rounded-full bg-[#0A66C2]/20 flex items-center justify-center" aria-hidden="true">
-                                            <i class="fab fa-linkedin text-[#0A66C2]"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-medium text-sm">Scheduled post</span>
-                                                <span class="text-xs text-gray-500">Tomorrow 9:00 AM</span>
-                                            </div>
-                                            <p class="text-xs text-gray-400 mt-1">Industry insights article share</p>
-                                        </div>
-                                        <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">Pending</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="text-gray-500">Select a conversation to start chatting</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="features" class="py-24 relative" aria-labelledby="features-heading">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 id="features-heading" class="sr-only">Features</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-indigo-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-brain text-2xl text-indigo-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Autonomous Content</h3>
-                        <p class="text-gray-400 leading-relaxed">AI agents that research trends, write copy, and generate visuals without human intervention. Set your brand voice once, let it run 24/7.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-pink-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-network-wired text-2xl text-pink-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Cross-Platform Sync</h3>
-                        <p class="text-gray-400 leading-relaxed">One content piece automatically adapted for each platform's format and audience. Native posting to 15+ social networks simultaneously.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-comments text-2xl text-cyan-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Smart Engagement</h3>
-                        <p class="text-gray-400 leading-relaxed">Auto-reply to comments, DMs, and mentions with context-aware responses. Maintain authentic conversations at scale.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-indigo-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-chart-pie text-2xl text-indigo-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Predictive Analytics</h3>
-                        <p class="text-gray-400 leading-relaxed">ML models predict optimal posting times, content performance, and trending topics before they peak.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-pink-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-shield-alt text-2xl text-pink-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Brand Safety</h3>
-                        <p class="text-gray-400 leading-relaxed">Advanced content filtering ensures every post aligns with your brand guidelines and compliance requirements.</p>
-                    </article>
-
-                    <article class="glass rounded-2xl p-8 border border-white/10 hover:border-cyan-500/30 transition-colors group">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fas fa-users text-2xl text-cyan-500"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 font-display">Team Collaboration</h3>
-                        <p class="text-gray-400 leading-relaxed">Multi-agent workflows with approval chains, role-based access, and collaborative campaign management.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="py-24 relative" aria-labelledby="pricing-heading">
-            <div class="absolute inset-0 bg-gradient-to-t from-indigo-500/5 to-transparent" aria-hidden="true"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-16">
-                    <h2 id="pricing-heading" class="font-display text-4xl font-bold mb-4">Simple <span class="gradient-text">Pricing</span></h2>
-                    <p class="text-gray-400">Scale your AI marketing team without scaling your headcount</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <article class="glass rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all">
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Starter</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display">$29</span>
-                            <span class="text-gray-500 ml-2">/month</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>1 AI Agent</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>3 Social Platforms</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>50 Posts/month</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Basic Analytics</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" onclick="alert('Starter plan selected')">Get Started</button>
-                    </article>
-
-                    <article class="glass rounded-3xl p-8 border border-indigo-500/50 relative transform md:-translate-y-4 shadow-2xl shadow-indigo-500/20">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-indigo-500 to-pink-500 px-4 py-1 rounded-full text-xs font-bold text-white">MOST POPULAR</div>
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Professional</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display gradient-text">$99</span>
-                            <span class="text-gray-500 ml-2">/month</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>5 AI Agents</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited Platforms</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited Posts</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Advanced Analytics</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>AI Image Generation</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Priority Support</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-indigo-500/25 transition-all hover:scale-105" onclick="alert('Pro trial started!')">Start Free Trial</button>
-                    </article>
-
-                    <article class="glass rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all">
-                        <h3 class="text-lg font-semibold text-gray-300 mb-2">Enterprise</h3>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-4xl font-bold font-display">Custom</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Unlimited AI Agents</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Custom Integrations</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Dedicated Infrastructure</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>SLA & 24/7 Support</span></li>
-                            <li class="flex items-center space-x-3 text-sm text-gray-300"><i class="fas fa-check text-indigo-500" aria-hidden="true"></i><span>Custom AI Training</span></li>
-                        </ul>
-                        <button class="w-full py-3 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 transition-colors" onclick="alert('Contact form would open')">Contact Sales</button>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 relative overflow-hidden" aria-label="Call to action">
-            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-pink-500/20 to-cyan-500/20 opacity-30" aria-hidden="true"></div>
-            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-                <h2 class="font-display text-5xl font-bold mb-6">Ready to Deploy Your <span class="gradient-text">AI Workforce?</span></h2>
-                <p class="text-xl text-gray-300 mb-8">Join thousands of marketers automating their social presence with intelligent agents.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="px-8 py-4 rounded-full bg-white text-slate-950 font-bold hover:scale-105 transition-transform" onclick="alert('Trial started! Check your email.')">Start Free 14-Day Trial</button>
-                    <button class="px-8 py-4 rounded-full border border-white/30 text-white font-medium hover:bg-white/10 transition-colors" onclick="alert('Demo scheduling modal')">Schedule Demo</button>
-                </div>
-                <p class="mt-6 text-sm text-gray-500">No credit card required • Cancel anytime</p>
-            </div>
-        </section>
     </main>
 
-    <footer class="border-t border-white/10 bg-black/40 backdrop-blur-lg" role="contentinfo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h4 class="font-bold mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-                        <li><a href="#platforms" class="hover:text-white transition-colors">Integrations</a></li>
-                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
-                    </ul>
+    <!-- Auth Modal -->
+    <div id="authModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 relative animate-float">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-100 rounded-2xl flex items-center justify-center text-brand-600 text-2xl mx-auto mb-4">
+                    <i class="fas fa-hand-holding-usd"></i>
                 </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Cookies</a></li>
-                    </ul>
-                </div>
+                <h2 id="authTitle" class="text-2xl font-bold text-gray-900">Welcome Back</h2>
+                <p class="text-gray-500 text-sm mt-1">Sign in to continue to Nikal Do</p>
             </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between">
-                <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <div class="w-6 h-6 bg-gradient-to-br from-indigo-500 to-pink-500 rounded flex items-center justify-center" aria-hidden="true">
-                        <i class="fas fa-robot text-white text-xs"></i>
-                    </div>
-                    <span class="font-display font-bold">AgentX</span>
-                </div>
-                <div class="flex space-x-6 text-gray-400">
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord" aria-hidden="true"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                </div>
-                <p class="text-sm text-gray-500 mt-4 md:mt-0">© 2026 AgentX. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Three.js Background
-        const scene=new THREE.Scene();
-        const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-        const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-        renderer.setSize(window.innerWidth,window.innerHeight);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        const particlesGeometry=new THREE.BufferGeometry();
-        const particlesCount=1500;
-        const posArray=new Float32Array(particlesCount*3);
-
-        for(let i=0;i<particlesCount*3;i++){
-            posArray[i]=(Math.random()-0.5)*50;
-        }
-
-        particlesGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3));
-        
-        const particlesMaterial=new THREE.PointsMaterial({
-            size:0.02,
-            color:0x6366f1,
-            transparent:true,
-            opacity:0.6,
-            blending:THREE.AdditiveBlending
-        });
-
-        const particlesMesh=new THREE.Points(particlesGeometry,particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z=5;
-
-        let mouseX=0,mouseY=0;
-        document.addEventListener('mousemove',(e)=>{
-            mouseX=e.clientX/window.innerWidth-0.5;
-            mouseY=e.clientY/window.innerHeight-0.5;
-        });
-
-        function animate(){
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y+=0.001;
-            particlesMesh.rotation.x+=0.001;
-            particlesMesh.rotation.x+=mouseY*0.05;
-            particlesMesh.rotation.y+=mouseX*0.05;
-            renderer.render(scene,camera);
-        }
-        animate();
-
-        window.addEventListener('resize',()=>{
-            camera.aspect=window.innerWidth/window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth,window.innerHeight);
-        });
-
-        // Platform Toggle
-        function togglePlatform(element){
-            const toggle=element.querySelector('.platform-toggle');
-            const badge=element.querySelector('.connected-badge');
-            const isActive=toggle.classList.contains('bg-green-500');
             
-            if(!isActive){
-                toggle.classList.remove('bg-gray-700');
-                toggle.classList.add('bg-green-500');
-                toggle.querySelector('div').classList.add('translate-x-4');
-                toggle.setAttribute('aria-checked','true');
-                badge.classList.remove('opacity-0');
-                element.classList.add('border-green-500/50');
-            }else{
-                toggle.classList.add('bg-gray-700');
-                toggle.classList.remove('bg-green-500');
-                toggle.querySelector('div').classList.remove('translate-x-4');
-                toggle.setAttribute('aria-checked','false');
-                badge.classList.add('opacity-0');
-                element.classList.remove('border-green-500/50');
-            }
-        }
-
-        // AI Content Generation
-        const sampleContents={
-            twitter:"🚀 Just dropped: Our AI agent now supports predictive analytics! Know which content will go viral before you post. Thread below 👇 #AIMarketing #SocialMedia",
-            linkedin:"Excited to announce that our latest AI marketing automation features are now live. After 6 months of development, we've achieved 40% higher engagement rates through predictive content optimization.",
-            instagram:"✨ Behind the scenes: How our AI creates the perfect carousel posts\n\n1️⃣ Analyzes trending visuals\n2️⃣ Generates cohesive color palettes\n3️⃣ Writes engaging captions\n4️⃣ Optimizes for your audience\n\nSave this for later! 🔖"
-        };
-
-        let typingInterval;
-
-        function generateContent(platform){
-            const container=document.getElementById('generated-content');
-            const textElement=document.getElementById('typing-text');
-            const input=document.getElementById('ai-input');
-            
-            if(typingInterval)clearInterval(typingInterval);
-            container.classList.remove('hidden');
-            
-            let content;
-            if(platform&&sampleContents[platform]){
-                content=sampleContents[platform];
-            }else if(input.value.trim()){
-                content=`Generated post about: "${input.value}"\n\nHere's an engaging caption optimized for maximum reach based on current trending topics...`;
-            }else{
-                const keys=Object.keys(sampleContents);
-                content=sampleContents[keys[Math.floor(Math.random()*keys.length)]];
-            }
-            
-            textElement.textContent='';
-            let i=0;
-            typingInterval=setInterval(()=>{
-                if(i<content.length){
-                    textElement.textContent+=content.charAt(i);
-                    i++;
-                }else{
-                    clearInterval(typingInterval);
-                }
-            },30);
-        }
-
-        // Activity Feed Updates
-        const activities=[
-            {platform:'twitter',icon:'fab fa-twitter',color:'#1DA1F2',text:'Analyzed trending hashtags for optimal reach'},
-            {platform:'instagram',icon:'fab fa-instagram',color:'#E1306C',text:'Generated visual content for Stories'},
-            {platform:'linkedin',icon:'fab fa-linkedin',color:'#0A66C2',text:'Scheduled thought leadership article'}
-        ];
-
-        setInterval(()=>{
-            const feed=document.getElementById('activity-feed');
-            const randomActivity=activities[Math.floor(Math.random()*activities.length)];
-            
-            const newItem=document.createElement('div');
-            newItem.className='flex items-center space-x-4 p-3 rounded-xl bg-white/5 border border-white/5 animate-pulse';
-            newItem.innerHTML=`
-                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:${randomActivity.color}20">
-                    <i class="${randomActivity.icon}" style="color:${randomActivity.color}"></i>
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                        <span class="font-medium text-sm">AI Agent Action</span>
-                        <span class="text-xs text-gray-500">Just now</span>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">${randomActivity.text}</p>
-                </div>
-            `;
-            
-            feed.insertBefore(newItem,feed.firstChild);
-            if(feed.children.length>5)feed.removeChild(feed.lastChild);
-            setTimeout(()=>newItem.classList.remove('animate-pulse'),1000);
-        },8000);
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-            anchor.addEventListener('click',function(e){
-                e.preventDefault();
-                const target=document.querySelector(this.getAttribute('href'));
-                if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
-            });
-        });
-
-        // Intersection Observer
-        const observer=new IntersectionObserver((entries)=>{
-            entries.forEach(entry=>{
-                if(entry.isIntersecting){
-                    entry.target.style.opacity='1';
-                    entry.target.style.transform='translateY(0)';
-                }
-            });
-        },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-
-        document.querySelectorAll('.glass, .platform-card').forEach((el,index)=>{
-            el.style.opacity='0';
-            el.style.transform='translateY(20px)';
-            el.style.transition=`all 0.6s ease ${index*0.1}s`;
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+            <form id="authForm" class="space-y-4">
+                <div id="nameField" class="hidden">
+                    <input type="text" placeholder="Full Name" class
